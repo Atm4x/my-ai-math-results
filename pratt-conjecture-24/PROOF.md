@@ -1,8 +1,10 @@
 # A radix-seven construction of superlinear cyclic ETF value
 
+The typeset preprint is available as [paper.pdf](paper.pdf) with [LaTeX source](paper.tex).
+
 ## 1. Statement
 
-Let $\operatorname{val}(G)$ be the maximum number of zero-sum triples in an equilateral trapezoid-free (ETF) triple of subsets of a finite abelian group $G$. In additive notation, ETF means that, for fixed anchors in the appropriate roles, each system
+Let $\mathrm{val}(G)$ be the maximum number of zero-sum triples in an equilateral trapezoid-free (ETF) triple of subsets of a finite abelian group $G$. In additive notation, ETF means that, for fixed anchors in the appropriate roles, each system
 
 $$
 0=a'+b+c=a+b'+c,\qquad
@@ -15,13 +17,13 @@ has at most one solution $(a,b,c)$ in the three subsets. This is Definition 17 o
 **Theorem.** For $k=8m$, $m\ge1$, put $N_k=3(7^k-1)+1$. Then
 
 $$
-\operatorname{val}(\mathbb Z_{N_k})\ge\frac{(8m)!}{(m!)^8}.
+\mathrm{val}(\mathbb{Z}_{N_k})\ge\frac{(8m)!}{(m!)^8}.
 $$
 
 In particular, along these moduli,
 
 $$
-\operatorname{val}(\mathbb Z_{N_k})
+\mathrm{val}(\mathbb{Z}_{N_k})
 =\Omega\left(N_k^{\log_7 8}/(\log N_k)^{7/2}\right).
 $$
 
@@ -110,9 +112,9 @@ $$
 
 ## 5. Cyclic embedding and asymptotics
 
-Take $N_k=3h+1$. Map $A_k,B_k$ into $\mathbb Z_{N_k}$ by reduction modulo $N_k$, and map $C_k$ by translation by $-h$ followed by reduction. The maps are injective. For $a,b,c\in[0,h]$, the only multiple of $N_k$ in the range of $a+b+c-h\in[-h,2h]$ is zero. Thus every modular target equation is equivalent to its integer counterpart, including the equations in all three anchored systems. ETF and target count are preserved.
+Take $N_k=3h+1$. Map $A_k,B_k$ into $\mathbb{Z}_{N_k}$ by reduction modulo $N_k$, and map $C_k$ by translation by $-h$ followed by reduction. The maps are injective. For $a,b,c\in[0,h]$, the only multiple of $N_k$ in the range of $a+b+c-h\in[-h,2h]$ is zero. Thus every modular target equation is equivalent to its integer counterpart, including the equations in all three anchored systems. ETF and target count are preserved.
 
-Stirling's formula gives $T_k=\Theta(8^k/k^{7/2})$, while $N_k=\Theta(7^k)$. This proves the claimed lower bound. For any fixed $0<\varepsilon<\log_7 8-1$, the ratio $\operatorname{val}(\mathbb Z_{N_k})/N_k^{1+\varepsilon}$ tends to infinity, contradicting Conjecture 24.
+Stirling's formula gives $T_k=\Theta(8^k/k^{7/2})$, while $N_k=\Theta(7^k)$. This proves the claimed lower bound. For any fixed $0<\varepsilon<\log_7 8-1$, the ratio $\mathrm{val}(\mathbb{Z}_{N_k})/N_k^{1+\varepsilon}$ tends to infinity, contradicting Conjecture 24.
 
 ## 6. Reproducibility and formal proof
 

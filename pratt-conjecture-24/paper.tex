@@ -1,0 +1,114 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs}
+\usepackage[hidelinks,pdftitle={A radix-seven counterexample to the cyclic-value conjecture},pdfauthor={Atm4x}]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\val}{\operatorname{val}}
+\newcommand{\Z}{\mathbb Z}
+\title{A radix-seven counterexample to Pratt's cyclic-value conjecture}
+\author{Atm4x\\\small AI-assisted research}
+\date{25 November 2026\\\small Preprint; independent review and priority verification pending}
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct equilateral trapezoid-free triples in cyclic groups with superlinear numbers of zero-sum triples. For every positive integer $m$, putting $k=8m$ and $N_k=3(7^k-1)+1$, the construction gives $\val(\Z_{N_k})\ge (8m)!/(m!)^8$. In particular the lower growth exponent is at least $\log_7 8>1$, contradicting Conjecture~24 of Pratt. The argument uses an eight-edge digit relation, a separable filter, fixed marginal digit counts and positional encoding. A companion Lean development verifies the induced ETF property and an alternative quantitative lower bound, sufficient to refute the conjecture's necessary natural-power formulation.
+\end{abstract}
+\section{Statement}
+For three subsets $A,B,C$ of an additive finite abelian group $G$, write $R=\{(a,b,c)\in A\times B\times C:a+b+c=0\}$. Following Pratt~\cite{pratt}, the triple is equilateral trapezoid-free (ETF) if, for every choice of fixed anchors in the appropriate roles, each system
+\[
+\begin{aligned}
+0&=a'+b+c=a+b'+c,\\
+0&=a'+b+c=a+b+c',\\
+0&=a+b'+c=a+b+c'
+\end{aligned}
+\]
+has at most one solution $(a,b,c)\in A\times B\times C$. The quantity $\val(G)$ is the maximum of $|R|$ over such triples (Definition~17). Conjecture~24 asserts that $\val(\Z_N)=O(N^{1+\varepsilon})$ for every $\varepsilon>0$.
+\begin{theorem}\label{thm:main}
+For every positive integer $m$, let $k=8m$ and $N_k=3(7^k-1)+1$. Then
+\[
+\val(\Z_{N_k})\ge \frac{(8m)!}{(m!)^8}.
+\]
+Consequently, along this infinite sequence of moduli,
+\[
+\val(\Z_{N_k})=\Omega\left(\frac{N_k^{\log_7 8}}{(\log N_k)^{7/2}}\right),
+\qquad \log_7 8=1.06862156\ldots .
+\]
+\end{theorem}
+\section{An eight-edge digit relation}
+Let $A=\{0,1,2,4\}$, $B=\{0,1,\ldots,6\}$ and $C=\{0,1,5,6\}$. Let $Y$ be the relation of triples in $A\times B\times C$ summing to six, and select the subrelation
+\[
+X=\{(0,0,6),(0,5,1),(0,6,0),(1,0,5),
+(2,3,1),(2,4,0),(4,1,1),(4,2,0)\}.
+\]
+The other three elements of $Y$ are $(0,1,5),(1,4,1),(1,5,0)$.
+\begin{lemma}\label{lem:seed}
+The abstract relation $X$ satisfies all three anchored uniqueness conditions. There exist integer functions $u,v,w$ on the digit alphabets such that $u(a)+v(b)+w(c)$ is zero on $X$ and one on $Y\setminus X$.
+\end{lemma}
+\begin{proof}
+The relation is linear: any two coordinates determine the third. For a fixed center in one role, take the Cartesian product of its two neighbor sets in the other roles. The following tables list those sets. Within each table the rectangles for distinct centers are disjoint.
+\begin{center}
+\begin{tabular}{c ll@{\qquad}c ll@{\qquad}c ll}
+\toprule
+$a$ & $B$ & $C$ & $b$ & $A$ & $C$ & $c$ & $A$ & $B$\\
+\midrule
+0 & 0,5,6 & 0,1,6 & 0 & 0,1 & 5,6 & 0 & 0,2,4 & 2,4,6\\
+1 & 0 & 5 & 1 & 4 & 1 & 1 & 0,2,4 & 1,3,5\\
+2 & 3,4 & 0,1 & 2 & 4 & 0 & 5 & 1 & 0\\
+4 & 1,2 & 0,1 & 3 & 2 & 1 & 6 & 0 & 0\\
+  & & & 4 & 2 & 0 & & &\\
+  & & & 5 & 0 & 1 & & &\\
+  & & & 6 & 0 & 0 & & &\\
+\bottomrule
+\end{tabular}
+\end{center}
+Fixed anchors in two roles therefore determine at most one center in the third, and linearity fixes the other two unknowns. For the filter, set $u(1)=1$, $v(0)=-2$, $w(5)=1$, $w(6)=2$, with all remaining values zero. Direct substitution into the eleven elements of $Y$ proves the assertion.
+\end{proof}
+Note that $Y$ itself is not ETF; the distinction between the selected relation and an induced relation is essential.
+\section{Positional encoding and the induced relation}
+Fix $m\ge1$, put $k=8m$ and $h=7^k-1$. Construct sets $A_k,B_k,C_k$ of integers by encoding length-$k$ radix-seven words with the following digit multiplicities, each multiplied by $m$:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Role & Digit multiplicities\\
+\midrule
+$A$ & $0:3,\ 1:1,\ 2:2,\ 4:2$\\
+$B$ & $0:2,\ 1:1,\ 2:1,\ 3:1,\ 4:1,\ 5:1,\ 6:1$\\
+$C$ & $0:3,\ 1:3,\ 5:1,\ 6:1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The encoding $(d_i)_{i=0}^{k-1}\mapsto\sum_i d_i7^i$ is injective at fixed length and its image lies in $[0,h]$.
+\begin{lemma}\label{lem:filter}
+Every induced integer target $a+b+c=h$ in these three sets consists coordinatewise of edges of $X$.
+\end{lemma}
+\begin{proof}
+The digit masses of the three words are $13m,21m,14m$, totaling $6k$. Ordinary addition gives nonnegative carries $q_0=q_k=0$ satisfying
+\[
+a_i+b_i+c_i+q_i=6+7q_{i+1}.
+\]
+Summing over $i$ gives $6\sum_{i=1}^{k-1}q_i=0$. Thus every carry vanishes and each coordinate triple belongs to $Y$. The marginal types also force the sum of all separable weights from Lemma~\ref{lem:seed} to be $m-4m+3m=0$. Since the weight of each coordinate triple in $Y$ is either zero or one, all coordinates must have weight zero and hence belong to $X$.
+\end{proof}
+\begin{lemma}\label{lem:count}
+The integer relation at height $h$ is ETF and has exactly $(8m)!/(m!)^8$ targets.
+\end{lemma}
+\begin{proof}
+Both equations in each anchored system are induced target equations. Lemma~\ref{lem:filter} implies that both hold coordinatewise in $X$. By Lemma~\ref{lem:seed} each coordinate has at most one solution, so there is at most one solution of the full system. This proves ETF in every orientation. Every ordered sequence containing $m$ copies of each of the eight selected digit edges gives a target with the prescribed marginals. Conversely, every target uses only $X$; the counts of digits $1,\ldots,6$ in the second role fix six edge multiplicities, and the counts of digits 5 and 6 in the third role fix the remaining two. Thus the number of targets is exactly the multinomial coefficient. Distinct sequences yield distinct triples by injectivity of the encoding.
+\end{proof}
+\section{Cyclic embedding and asymptotics}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Set $N_k=3h+1$. Map the first two integer sets into $\Z_{N_k}$ by reduction, and the third by translation by $-h$ followed by reduction. All three maps are injective. For $a,b,c\in[0,h]$, the quantity $a+b+c-h$ belongs to $[-h,2h]$, where zero is the only multiple of $N_k$. Hence modular target equations are equivalent to their integer counterparts, in particular in all three anchored systems. Lemma~\ref{lem:count} gives the claimed ETF witness. Stirling's formula yields $(8m)!/(m!)^8=\Theta(8^k/k^{7/2})$, whereas $N_k=\Theta(7^k)$. The bound follows. For any fixed $0<\varepsilon<\log_7 8-1$, the ratio $\val(\Z_{N_k})/N_k^{1+\varepsilon}$ tends to infinity, contradicting Conjecture~24.
+\end{proof}
+\section{Formal verification and scope}
+The companion \href{https://github.com/Atm4x/my-ai-math-results/tree/main/pratt-conjecture-24/lean}{Lean development} (Lean 4.34.0, standard library only) checks all three ETF conditions, the digit filter, the carry argument, the induced relation and cyclic embedding. Rather than formalizing Stirling's formula it uses a finite pigeonhole argument and proves the all-length estimate
+\[
+8^n\le (6n+1)^6\val(\Z_{3(7^n-1)+1}).
+\]
+Its principal theorem, \texttt{Pratt.not\_ValPrattConjecture24}, negates the necessary natural-power formulation: for every natural $K,N_0$ there is $N\ge N_0$, $N>0$, with $\val(\Z_N)^{100}>K N^{101}$. If the real-exponent conjecture held, choosing $\varepsilon=1/100$ and raising its bound to the 100th power would contradict this statement. This last elementary implication is given in prose, not formalized over the reals. The recorded kernel audit has only the standard axioms \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+
+This preprint does not settle the stronger SDPP conjecture or the matrix multiplication exponent. The sharper multinomial estimate is the informal argument above; the formal proof uses the alternative bound. Independent external review and scientific priority verification remain pending.
+\begin{thebibliography}{1}
+\bibitem{pratt} K. Pratt, On Generalized Corners and Matrix Multiplication, \emph{15th Innovations in Theoretical Computer Science Conference (ITCS 2024)}, LIPIcs 287, article 89, 2024. \href{https://doi.org/10.4230/LIPIcs.ITCS.2024.89}{doi:10.4230/LIPIcs.ITCS.2024.89}.
+\end{thebibliography}
+\end{document}

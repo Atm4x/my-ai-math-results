@@ -1,11 +1,13 @@
 # A radix-seven counterexample to Pratt's cyclic-value conjecture
 
+[![Pratt verification](https://github.com/Atm4x/my-ai-math-results/actions/workflows/pratt-conjecture-24.yml/badge.svg?branch=main)](https://github.com/Atm4x/my-ai-math-results/actions/workflows/pratt-conjecture-24.yml)
+
 **Research result — 25 November 2026. AI-assisted; independent mathematical review and priority verification pending.**
 
 We construct equilateral trapezoid-free (ETF) triples in cyclic groups with superlinear numbers of zero-sum triples. For infinitely many moduli $N$,
 
 $$
-\operatorname{val}(\mathbb Z_N)\ge
+\mathrm{val}(\mathbb{Z}_N)\ge
 \Omega\left(\frac{N^{\log_7 8}}{(\log N)^{7/2}}\right),
 \qquad \log_7 8=1.0686215613240664\ldots .
 $$
@@ -16,12 +18,18 @@ This contradicts Conjecture 24 of Kevin Pratt, [*On Generalized Corners and Matr
 
 | File | Purpose |
 | --- | --- |
+| [paper.pdf](paper.pdf) | Typeset preprint (published by CI after successful verification) |
+| [paper.tex](paper.tex) | LaTeX source for the preprint |
 | [PROOF.md](PROOF.md) | Self-contained mathematical argument and explicit construction |
 | [lean/Pratt.lean](lean/Pratt.lean) | Unmodified Lean 4 proof, including the exact finite maximum defining val |
 | [lean/README.md](lean/README.md) | Formal statement correspondence and reproduction instructions |
 | [lean/verification.log](lean/verification.log) | Recorded compiler and axiom audit |
 | [lean/verify.sh](lean/verify.sh) | Standalone verification script |
 | [verify_seed.py](verify_seed.py) | Independent finite digit certificate and exact factorial comparisons |
+
+## Continuous verification
+
+The [dedicated GitHub Actions workflow](../.github/workflows/pratt-conjecture-24.yml) verifies this folder independently, checks the finite certificate, and builds the LaTeX preprint. Pushes and pull requests touching this result trigger it; manual runs are also supported. Verification logs and the PDF are attached as workflow artifacts. A successful main-branch run publishes `paper.pdf` beside the source. It does not rebuild unrelated results.
 
 ## Formal verification
 
@@ -30,7 +38,7 @@ Lean 4.34.0, standard library only. The principal theorem is `Pratt.not_ValPratt
 The kernel also accepts the quantitative inequality
 
 $$
-8^n\le (6n+1)^6\operatorname{val}(\mathbb Z_{3(7^n-1)+1}).
+8^n\le (6n+1)^6\mathrm{val}(\mathbb{Z}_{3(7^n-1)+1}).
 $$
 
 The formal proof uses a pigeonhole count instead of Stirling's formula, so its polynomial loss differs from the sharper informal bound; the exponential rate is identical. The final theorem depends only on the standard Lean axioms `propext`, `Classical.choice`, and `Quot.sound`. No Mathlib or external solver is needed.
