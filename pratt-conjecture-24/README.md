@@ -2,7 +2,7 @@
 
 **Research result — 25 November 2026. AI-assisted; independent mathematical review and priority verification pending.**
 
-We construct equilateral trapezoid-free (ETF) triples in cyclic groups with superlinear numbers of zero-sum triples. For infinitely many moduli \(N\),
+We construct equilateral trapezoid-free (ETF) triples in cyclic groups with superlinear numbers of zero-sum triples. For infinitely many moduli $N$,
 
 $$
 \operatorname{val}(\mathbb Z_N)\ge
@@ -37,6 +37,6 @@ The formal proof uses a pigeonhole count instead of Stirling's formula, so its p
 
 ## Scope and next question
 
-Pratt's Theorem 30 gives a necessary lower bound of order \(N^{4/3-\varepsilon}\) if the SDPP conjecture is true. The present construction does not achieve that exponent and does not settle SDPP. Studying higher-rate ETF seeds and new composition operations is a separate open research direction.
+Pratt's Theorem 30 gives a necessary lower bound of order $N^{4/3-\varepsilon}$ if the SDPP conjecture is true. The present construction does not achieve that exponent and does not settle SDPP. Studying higher-rate ETF seeds and new composition operations is a separate open research direction.
 
 No claim of scientific priority is made. The repository records an AI-assisted research result and invites independent scrutiny of the mathematics and the correspondence of the Lean statement to the published definition.
