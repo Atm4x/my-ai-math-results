@@ -1,0 +1,42 @@
+# A radix-seven counterexample to Pratt's cyclic-value conjecture
+
+**Research result — 25 November 2026. AI-assisted; independent mathematical review and priority verification pending.**
+
+We construct equilateral trapezoid-free (ETF) triples in cyclic groups with superlinear numbers of zero-sum triples. For infinitely many moduli \(N\),
+
+$$
+\operatorname{val}(\mathbb Z_N)\ge
+\Omega\left(\frac{N^{\log_7 8}}{(\log N)^{7/2}}\right),
+\qquad \log_7 8=1.0686215613240664\ldots .
+$$
+
+This contradicts Conjecture 24 of Kevin Pratt, [*On Generalized Corners and Matrix Multiplication*](https://doi.org/10.4230/LIPIcs.ITCS.2024.89), ITCS 2024. The construction uses eight digit triples, a separable filter, fixed marginal digit counts and positional encoding. It is not a claim about the stronger SDPP conjecture or the matrix multiplication exponent.
+
+## Read and reproduce
+
+| File | Purpose |
+| --- | --- |
+| [PROOF.md](PROOF.md) | Self-contained mathematical argument and explicit construction |
+| [lean/Pratt.lean](lean/Pratt.lean) | Unmodified Lean 4 proof, including the exact finite maximum defining val |
+| [lean/README.md](lean/README.md) | Formal statement correspondence and reproduction instructions |
+| [lean/verification.log](lean/verification.log) | Recorded compiler and axiom audit |
+| [lean/verify.sh](lean/verify.sh) | Standalone verification script |
+| [verify_seed.py](verify_seed.py) | Independent finite digit certificate and exact factorial comparisons |
+
+## Formal verification
+
+Lean 4.34.0, standard library only. The principal theorem is `Pratt.not_ValPrattConjecture24`, which negates the natural-power form of the conjecture. The proof of the necessary real-exponent-to-natural-power implication is given in the documentation in prose, not formalized over the reals.
+
+The kernel also accepts the quantitative inequality
+
+$$
+8^n\le (6n+1)^6\operatorname{val}(\mathbb Z_{3(7^n-1)+1}).
+$$
+
+The formal proof uses a pigeonhole count instead of Stirling's formula, so its polynomial loss differs from the sharper informal bound; the exponential rate is identical. The final theorem depends only on the standard Lean axioms `propext`, `Classical.choice`, and `Quot.sound`. No Mathlib or external solver is needed.
+
+## Scope and next question
+
+Pratt's Theorem 30 gives a necessary lower bound of order \(N^{4/3-\varepsilon}\) if the SDPP conjecture is true. The present construction does not achieve that exponent and does not settle SDPP. Studying higher-rate ETF seeds and new composition operations is a separate open research direction.
+
+No claim of scientific priority is made. The repository records an AI-assisted research result and invites independent scrutiny of the mathematics and the correspondence of the Lean statement to the published definition.

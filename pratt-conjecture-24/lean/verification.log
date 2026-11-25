@@ -1,0 +1,15 @@
+Lean (version 4.34.0, x86_64-unknown-linux-gnu, commit 293d5d0c0c3f3dded4688b3ccd6a33939ac5102b, Release)
+Command: lean --trust=0 --error=warning -o Pratt.olean Pratt.lean
+'Pratt.digitETF' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.word_filter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.targetETF' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.large_cyclic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.explicit_violation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.not_PrattConjecture24' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.fin_explicit_violation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.not_FinPrattConjecture24' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.val_le_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.val_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.val_ge_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pratt.not_ValPrattConjecture24' depends on axioms: [propext, Classical.choice, Quot.sound]
+elapsed=7.82 sec, maxrss=998644 KB, exit=0
